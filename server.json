@@ -3,7 +3,7 @@
   "name": "io.fluf/mcp",
   "description": "Manage a FLUF Connect resale account from an AI agent: inventory, crosslisting to marketplaces, and unified orders.",
   "repository": {
-    "url": "https://github.com/FLUF-Admin/fluf-mcp",
+    "url": "https://github.com/FLUF-io/fluf-mcp",
     "source": "github"
   },
   "version": "0.1.0",

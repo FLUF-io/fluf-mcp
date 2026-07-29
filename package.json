@@ -45,5 +45,13 @@
   "devDependencies": {
     "@types/node": "^20.11.0",
     "typescript": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FLUF-io/fluf-mcp.git"
+  },
+  "homepage": "https://fluf.io",
+  "bugs": {
+    "url": "https://github.com/FLUF-io/fluf-mcp/issues"
   }
 }
