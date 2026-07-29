@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.fluf/mcp",
+  "description": "Manage a FLUF Connect resale account from an AI agent: inventory, crosslisting to marketplaces, and unified orders.",
+  "repository": {
+    "url": "https://github.com/FLUF-Admin/fluf-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "websiteUrl": "https://fluf.io",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@fluf/mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "FLUF_API_TOKEN",
+          "description": "Personal access token from https://fluf.io/connect/settings (Developer tab). Requires an active FLUF plan.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "FLUF_BASE_URL",
+          "description": "Override the API host. Defaults to https://fluf.io.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
