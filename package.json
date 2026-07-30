@@ -1,6 +1,6 @@
 {
-  "name": "@fluf/mcp",
-  "version": "0.1.0",
+  "name": "fluf-mcp",
+  "version": "0.1.1",
   "mcpName": "io.fluf/mcp",
   "description": "Model Context Protocol server for FLUF Connect — crosslisting, inventory sync, orders and offers across Depop, eBay, Shopify, Etsy, Vinted, Facebook and more.",
   "type": "module",
@@ -8,6 +8,9 @@
     "fluf-mcp": "dist/index.js"
   },
   "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md"
@@ -34,7 +37,7 @@
     "marketplace"
   ],
   "author": "FLUF.io",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "engines": {
     "node": ">=18"
   },

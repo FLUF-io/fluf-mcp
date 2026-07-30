@@ -1,4 +1,4 @@
-# @fluf/mcp — FLUF Connect for AI agents
+# fluf-mcp — FLUF Connect for AI agents
 
 A [Model Context Protocol](https://modelcontextprotocol.io) server that lets an AI
 agent (Claude, Cursor, Windsurf, Cline, and anything else that speaks MCP) work a
@@ -26,10 +26,10 @@ to learn a per-marketplace API, and never handles your marketplace credentials.
 ## Install
 
 ```bash
-npm install -g @fluf/mcp
+npm install -g fluf-mcp
 ```
 
-Create a token at <https://fluf.io/connect/settings/tokens>. It's shown once —
+Create a token at <https://fluf.io/connect/settings/?section=developer>. It's shown once —
 store it like a password. Revoke it there any time.
 
 ## Configure
@@ -43,7 +43,7 @@ store it like a password. Revoke it there any time.
   "mcpServers": {
     "fluf": {
       "command": "npx",
-      "args": ["-y", "@fluf/mcp"],
+      "args": ["-y", "fluf-mcp"],
       "env": { "FLUF_API_TOKEN": "fluf_pat_..." }
     }
   }
@@ -53,7 +53,7 @@ store it like a password. Revoke it there any time.
 ### Claude Code
 
 ```bash
-claude mcp add fluf --env FLUF_API_TOKEN=fluf_pat_... -- npx -y @fluf/mcp
+claude mcp add fluf --env FLUF_API_TOKEN=fluf_pat_... -- npx -y fluf-mcp
 ```
 
 ### Cursor
@@ -65,7 +65,7 @@ claude mcp add fluf --env FLUF_API_TOKEN=fluf_pat_... -- npx -y @fluf/mcp
   "mcpServers": {
     "fluf": {
       "command": "npx",
-      "args": ["-y", "@fluf/mcp"],
+      "args": ["-y", "fluf-mcp"],
       "env": { "FLUF_API_TOKEN": "fluf_pat_..." }
     }
   }

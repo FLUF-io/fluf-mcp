@@ -1,4 +1,11 @@
 const DEFAULT_BASE_URL = "https://fluf.io";
+const VERSION = "0.1.1";
+
+// ⚠️ The token UI is a *query-string* section of the settings page, not a path.
+// /connect/settings/tokens is NOT a route — the SPA reads ?section=, whose only
+// values are developer|notifications|profile — so the old link silently landed
+// people on the default tab. This is the first thing a new user ever sees.
+const TOKENS_URL = "https://fluf.io/connect/settings/?section=developer";
 
 export interface FlufClientConfig {
   baseUrl: string;
@@ -10,9 +17,8 @@ export function loadConfig(): FlufClientConfig {
   if (!token) {
     throw new Error(
       "FLUF_API_TOKEN environment variable is required. " +
-        "Generate one at https://fluf.io/connect/settings/tokens " +
-        "(token format: fluf_pat_...). " +
-        "POST /wp-json/fc/v1/tokens with a JWT also works for CI."
+        `Generate one at ${TOKENS_URL} ` +
+        "(token format: fluf_pat_...)."
     );
   }
   return {
@@ -36,7 +42,7 @@ export class FlufClient {
         Authorization: `Bearer ${this.config.token}`,
         "Content-Type": "application/json",
         Accept: "application/json",
-        "User-Agent": "fluf-mcp/0.1.0",
+        "User-Agent": `fluf-mcp/${VERSION}`,
       },
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
@@ -69,7 +75,7 @@ export class FlufClient {
       if (res.status === 401) {
         throw new Error(
           "FLUF rejected this API token. It may have been revoked or expired — " +
-            "issue a new one at https://fluf.io/connect/settings/tokens"
+            `issue a new one at ${TOKENS_URL}`
         );
       }
 
