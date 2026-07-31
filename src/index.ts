@@ -7,7 +7,7 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
 
-import { FlufClient, loadConfig } from "./client.js";
+import { FlufClient, loadConfig, VERSION } from "./client.js";
 import {
   reportBugSchema,
   reportBugDescription,
@@ -33,6 +33,11 @@ import {
   listChannelsDescription,
   runListChannels,
 } from "./tools/list_channels.js";
+import {
+  askIntesaSchema,
+  askIntesaDescription,
+  runAskIntesa,
+} from "./tools/ask_intesa.js";
 
 function zodToJsonSchema(shape: z.ZodRawShape): {
   type: "object";
@@ -110,6 +115,12 @@ const TOOLS = [
     shape: listChannelsSchema,
     run: runListChannels,
   },
+  {
+    name: "ask_intesa",
+    description: askIntesaDescription,
+    shape: askIntesaSchema,
+    run: runAskIntesa,
+  },
 ] as const;
 
 async function main() {
@@ -117,7 +128,7 @@ async function main() {
   const client = new FlufClient(config);
 
   const server = new Server(
-    { name: "fluf-mcp", version: "0.1.0" },
+    { name: "fluf-mcp", version: VERSION },
     { capabilities: { tools: {} } }
   );
 

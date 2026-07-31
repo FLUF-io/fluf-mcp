@@ -3,7 +3,8 @@
 A [Model Context Protocol](https://modelcontextprotocol.io) server that lets an AI
 agent (Claude, Cursor, Windsurf, Cline, and anything else that speaks MCP) work a
 [FLUF Connect](https://fluf.io) account: read inventory, list items across
-marketplaces, read orders, and raise a support ticket.
+marketplaces, read orders, ask FLUF's own assistant a question, and raise a
+support ticket.
 
 One account, one token, every marketplace you've connected — the agent never has
 to learn a per-marketplace API, and never handles your marketplace credentials.
@@ -16,6 +17,7 @@ to learn a per-marketplace API, and never handles your marketplace credentials.
 | `list_products` | Your products, with the channels each one is already live on. |
 | `crosslist`     | List one or more products on one or more marketplaces. |
 | `get_orders`    | Your orders across every connected marketplace, in one shape. |
+| `ask_intesa`    | Ask FLUF's own assistant an open-ended question about your account — why a channel stopped syncing, what a listing error means, what sold and where. |
 | `report_bug`    | Raise a bug with FLUF support on your behalf. |
 
 ## Requirements
@@ -87,13 +89,20 @@ Ask in plain language — the agent picks the tools:
 
 > "Show me everything that sold last week and which channel it sold on."
 
-Two things worth knowing:
+> "Why did my last five Vinted listings fail?"
+
+Three things worth knowing:
 
 - **Always call `list_channels` first.** The available marketplaces differ per
   account and change over time; don't hardcode a list.
 - **`crosslist` is not always instant.** Some channels are handed to your own
   browser session to complete, so the response may say *queued* rather than
   *listed*. Read the per-channel status; don't assume success.
+- **`ask_intesa` is the slow, clever one.** It hands the question to Intesa, the
+  assistant inside FLUF, which runs its own multi-step investigation before
+  answering — so it can explain *why* something happened, not just report what
+  is. Replies can take up to a minute. Use the direct tools for simple reads;
+  reach for this when the question is diagnostic or open-ended.
 
 ## Develop
 
@@ -116,4 +125,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' \
 
 ## License
 
-Proprietary — © FLUF.io. Requires a FLUF Connect account on an active plan.
+MIT — see [LICENSE](LICENSE). © FLUF.io.
+
+The server itself is open; the account it talks to is not. You'll still need a FLUF
+Connect account on an active plan for any of it to do anything.

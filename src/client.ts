@@ -1,5 +1,5 @@
 const DEFAULT_BASE_URL = "https://fluf.io";
-const VERSION = "0.1.1";
+export const VERSION = "0.1.2";
 
 // ⚠️ The token UI is a *query-string* section of the settings page, not a path.
 // /connect/settings/tokens is NOT a route — the SPA reads ?section=, whose only
