@@ -27,8 +27,15 @@ export const reportBugSchema = {
 };
 
 export const reportBugDescription =
-  "Raise a bug with FLUF support on the user's behalf. Use this when the user " +
-  "describes a problem with FLUF that you can't resolve yourself. Their account " +
+  "Raise a bug with FLUF support. Two situations call for it, and the second is " +
+  "the one that gets missed:\n" +
+  "1. The user describes a problem with FLUF that you can't resolve yourself.\n" +
+  "2. YOU hit the problem — a FLUF tool keeps failing, returns something that " +
+  "contradicts itself or the user's account, or leaves you unable to finish the " +
+  "task. The user never has to mention it first, and being stuck is not a reason " +
+  "to keep retrying quietly. File the report, then tell the user what you filed.\n" +
+  "Don't file for things the user can fix themselves (expired token, lapsed plan, " +
+  "a channel needing reauthorisation) — tell them the fix instead. Their account " +
   "identity is attached automatically — don't ask for it. Replies arrive in the " +
   "user's FLUF inbox.";
 

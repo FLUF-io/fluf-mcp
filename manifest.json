@@ -1,0 +1,97 @@
+{
+  "manifest_version": "0.3",
+  "name": "fluf-mcp",
+  "display_name": "FLUF Connect",
+  "version": "0.2.2",
+  "description": "Work your FLUF Connect account from Claude: what's live where, dead stock, orders, failed listings, and crosslisting.",
+  "long_description": "FLUF Connect lists one item across Depop, eBay, Shopify, Etsy, Vinted, Facebook and more. This extension lets Claude work that account directly.\n\nAsk in plain language — \"what's in stock that isn't on eBay yet?\", \"what sold last week and where?\", \"why did my last five Vinted listings fail?\" — or use a recipe for a whole workflow: /dead_stock, /morning_sales, /listing_failures, /expansion, /support.\n\nFive of the six tools only read your account. Only `crosslist` writes, and it creates listings — nothing here can edit or delete one. Claude asks your approval before every action.\n\nYou need a FLUF Connect account on a paid plan and a token from More → Developers at https://fluf.io/connect/developers.",
+  "author": {
+    "name": "FLUF.io",
+    "email": "info@fluf.io",
+    "url": "https://fluf.io"
+  },
+  "homepage": "https://fluf.io/developers",
+  "documentation": "https://github.com/FLUF-io/fluf-mcp#readme",
+  "support": "https://github.com/FLUF-io/fluf-mcp/issues",
+  "icon": "icon.png",
+  "license": "MIT",
+  "keywords": [
+    "fluf",
+    "crosslisting",
+    "reselling",
+    "marketplace",
+    "inventory",
+    "orders",
+    "depop",
+    "ebay",
+    "shopify",
+    "etsy",
+    "vinted"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {
+        "FLUF_API_TOKEN": "${user_config.fluf_api_token}",
+        "FLUF_BASE_URL": "${user_config.fluf_base_url}"
+      }
+    }
+  },
+  "user_config": {
+    "fluf_api_token": {
+      "type": "string",
+      "title": "FLUF API token",
+      "description": "Create one at https://fluf.io/connect/developers (More → Developers in the sidebar). It starts with fluf_pat_ and is shown only once.",
+      "sensitive": true,
+      "required": true
+    },
+    "fluf_base_url": {
+      "type": "string",
+      "title": "FLUF address",
+      "description": "Leave this alone unless FLUF support asks you to change it.",
+      "default": "https://fluf.io",
+      "required": false
+    }
+  },
+  "tools": [
+    {
+      "name": "list_channels",
+      "description": "Which marketplaces this account has connected, and which it can list to."
+    },
+    {
+      "name": "list_products",
+      "description": "Your products, with the channels each one is already live on."
+    },
+    {
+      "name": "get_orders",
+      "description": "Your orders across every connected marketplace, in one shape."
+    },
+    {
+      "name": "ask_intesa",
+      "description": "Ask FLUF's own assistant an open-ended question about your account."
+    },
+    {
+      "name": "crosslist",
+      "description": "List one or more products on one or more marketplaces."
+    },
+    {
+      "name": "report_bug",
+      "description": "Raise a bug with FLUF support on your behalf."
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

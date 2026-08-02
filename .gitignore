@@ -3,3 +3,7 @@ dist/
 *.log
 .env
 .env.local
+
+# mcpb bundle build
+.mcpb-build/
+*.mcpb
