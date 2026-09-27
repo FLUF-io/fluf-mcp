@@ -46,6 +46,21 @@ import {
   askIntesaDescription,
   runAskIntesa,
 } from "./tools/ask_intesa.js";
+import {
+  deleteProductsSchema,
+  deleteProductsDescription,
+  runDeleteProducts,
+} from "./tools/delete_products.js";
+import {
+  listDraftsSchema,
+  listDraftsDescription,
+  runListDrafts,
+} from "./tools/list_drafts.js";
+import {
+  approveDraftSchema,
+  approveDraftDescription,
+  runApproveDraft,
+} from "./tools/approve_draft.js";
 
 function zodToJsonSchema(shape: z.ZodRawShape): {
   type: "object";
@@ -82,6 +97,11 @@ function zodToJsonSchema(shape: z.ZodRawShape): {
       } else {
         node.items = {};
       }
+    } else if (inner instanceof z.ZodRecord || inner instanceof z.ZodObject) {
+      // A free-form map (approve_draft's `edits`). Without this branch it would be
+      // advertised as a string and the agent would send JSON text, not an object.
+      node.type = "object";
+      node.additionalProperties = true;
     } else {
       node.type = "string";
     }
@@ -129,6 +149,24 @@ const TOOLS = [
     shape: askIntesaSchema,
     run: runAskIntesa,
   },
+  {
+    name: "delete_products",
+    description: deleteProductsDescription,
+    shape: deleteProductsSchema,
+    run: runDeleteProducts,
+  },
+  {
+    name: "list_drafts",
+    description: listDraftsDescription,
+    shape: listDraftsSchema,
+    run: runListDrafts,
+  },
+  {
+    name: "approve_draft",
+    description: approveDraftDescription,
+    shape: approveDraftSchema,
+    run: runApproveDraft,
+  },
 ] as const;
 
 /**
@@ -154,8 +192,10 @@ const INSTRUCTIONS = [
     "contradicts the user's account, a task you cannot finish. You do not need " +
     "the user to raise it first, and you should not retry a failing call more " +
     "than twice before reporting it. Put the exact error text and the ids you " +
-    "were working with in `context` — that is what makes it fixable. Then tell " +
-    "the user what you filed.",
+    "were working with in `context` — that is what makes it fixable. Keep the " +
+    "report to a title and two or three sentences; it lands as a DM a person " +
+    "reads, and a wall of text buries the fact that fixes it. Then tell the " +
+    "user what you filed.",
   "",
   "Exception: things the user can fix themselves — an expired API token, a " +
     "lapsed plan, a channel needing reauthorisation — are not bugs. Tell them " +
@@ -164,6 +204,11 @@ const INSTRUCTIONS = [
   "`ask_intesa` is FLUF's own assistant and can see the listings log, sync " +
     "history and error text this server cannot. Ask it before concluding that " +
     "something is broken.",
+  "",
+  "A listing a marketplace refused for a fixable reason (size, brand, category, " +
+    "price, wording) waits in `list_drafts` as a `failed` draft with the reason and " +
+    "the editable fields. Fix it with `approve_draft` — take the corrected value " +
+    "from the product, never guess — rather than re-running `crosslist`.",
 ].join("\n");
 
 /**

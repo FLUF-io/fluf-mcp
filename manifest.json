@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "fluf-mcp",
   "display_name": "FLUF Connect",
-  "version": "0.2.2",
+  "version": "0.2.7",
   "description": "Work your FLUF Connect account from Claude: what's live where, dead stock, orders, failed listings, and crosslisting.",
   "long_description": "FLUF Connect lists one item across Depop, eBay, Shopify, Etsy, Vinted, Facebook and more. This extension lets Claude work that account directly.\n\nAsk in plain language — \"what's in stock that isn't on eBay yet?\", \"what sold last week and where?\", \"why did my last five Vinted listings fail?\" — or use a recipe for a whole workflow: /dead_stock, /morning_sales, /listing_failures, /expansion, /support.\n\nFive of the six tools only read your account. Only `crosslist` writes, and it creates listings — nothing here can edit or delete one. Claude asks your approval before every action.\n\nYou need a FLUF Connect account on a paid plan and a token from More → Developers at https://fluf.io/connect/developers.",
   "author": {

@@ -53,6 +53,8 @@ is how an agent loses a seller's trust:
 | `list_products` | Your products, with the channels each one is already live on. |
 | `crosslist`     | List one or more products on one or more marketplaces. |
 | `get_orders`    | Your orders across every connected marketplace, in one shape. |
+| `list_drafts`   | Listings a marketplace refused for a fixable reason (size, brand, category, price, wording), with the reason and the editable fields — plus anything waiting for your go-ahead. |
+| `approve_draft` | Correct a draft's fields and send it to the marketplace. |
 | `ask_intesa`    | Ask FLUF's own assistant an open-ended question about your account — why a channel stopped syncing, what a listing error means, what sold and where. |
 | `report_bug`    | Raise a bug with FLUF support on your behalf — either when you report a problem, or when the agent itself gets stuck and can't finish the job. |
 

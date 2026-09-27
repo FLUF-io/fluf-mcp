@@ -1,5 +1,5 @@
 const DEFAULT_BASE_URL = "https://fluf.io";
-export const VERSION = "0.2.2";
+export const VERSION = "0.2.6";
 
 // The token UI moved out of Settings in Aug 2026 and is now its own route,
 // reachable from More → Developers in the sidebar. The old
